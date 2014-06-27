@@ -1,5 +1,8 @@
 #!/usr/bin/python
 
+import os
+root_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+
 import functools, math
 
 class OneGramDist(dict):
@@ -17,7 +20,7 @@ class OneGramDist(dict):
       else:
          return 1.0 / (self.gramCount * 10**(len(key)-2))
 
-singleWordProb = OneGramDist('one-grams.txt')
+singleWordProb = OneGramDist(root_dir + '/data/one-grams.txt')
 def wordSeqFitness(words):
    return sum(math.log10(singleWordProb(w)) for w in words)
 
